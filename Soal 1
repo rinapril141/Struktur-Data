@@ -1,0 +1,8 @@
+const arr = [1,1,2,2,2,3,3,3,3];
+const frequency = {};
+
+arr.forEach(num =>{
+    frequency[num] = (frequency[num] || 0) + 1;
+});
+
+console.log(frequency);
