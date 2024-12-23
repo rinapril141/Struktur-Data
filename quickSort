@@ -1,0 +1,37 @@
+// Fungsi untuk melakukan partition
+function partition(arr, low, high) {
+    let pivot = arr[high];  // Menentukan pivot sebagai elemen terakhir
+    let i = low - 1;  // Indeks elemen yang lebih kecil dari pivot
+
+    for (let j = low; j < high; j++) {
+        // Jika elemen saat ini lebih kecil atau sama dengan pivot
+        if (arr[j] <= pivot) {
+            i++;
+            // Menukar elemen arr[i] dan arr[j]
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    // Menukar pivot ke posisi yang tepat
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+    return i + 1;  // Mengembalikan indeks pivot
+}
+
+// Fungsi Quick Sort
+function quickSort(arr, low = 0, high = arr.length - 1) {
+    if (low < high) {
+        // Menemukan posisi pivot yang sudah diurutkan
+        let pi = partition(arr, low, high);
+
+        // Mengurutkan bagian kiri dan kanan dari pivot
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+// Contoh penggunaan
+let arr = [44, 28, 36, 1, 4, 15];
+// Cetak array sebelum diurutkan
+console.log("Array sebelum diurutkan:", arr);
+// Panggil quickSort dan cetak hasilnya
+quickSort(arr);
+console.log("Array setelah diurutkan:", arr);
