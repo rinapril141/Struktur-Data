@@ -1,0 +1,39 @@
+// Fungsi untuk mendapatkan digit tertentu dari angka pada posisi tertentu (dari kanan)
+function getDigit(num, place) {
+    return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+}
+
+// Fungsi untuk menentukan jumlah digit terpanjang dalam array
+function getMaxDigits(arr) {
+    let maxNum = Math.max(...arr);
+    return maxNum.toString().length;
+}
+
+// Fungsi untuk melakukan Radix Sort
+function radixSort(arr) {
+    let maxDigits = getMaxDigits(arr);
+
+    // Lakukan sorting berdasarkan setiap digit
+    for (let i = 0; i < maxDigits; i++) {
+        // Menggunakan counting sort untuk masing-masing digit
+        let buckets = Array.from({ length: 10 }, () => []);
+        
+        // Menempatkan angka ke dalam buckets berdasarkan digit yang sesuai
+        for (let j = 0; j < arr.length; j++) {
+            let digit = getDigit(arr[j], i);
+            buckets[digit].push(arr[j]);
+        }
+
+        // Menggabungkan semua bucket untuk mendapatkan array yang sudah disortir untuk digit tersebut
+        arr = [].concat(...buckets);
+    }
+    return arr;
+}
+
+// Contoh penggunaan
+let arr = [170, 45, 75, 90, 802, 24, 2, 66];
+// Cetak array sebelum diurutkan
+console.log("Array sebelum diurutkan:", arr);
+// panggil fungsi radixSort dan cetak hasilnya
+let sortedArr = radixSort(arr);
+console.log("Array setelah diurutkan:", sortedArr);
